@@ -1,3 +1,5 @@
-package com.example.runningtrackerapp.data.model
+package com.example.myproducts.data.model
 
-class Products : ArrayList<ProductItem>()
+import com.example.myproducts.data.model.ProductDetails
+
+class Products : ArrayList<ProductDetails>()

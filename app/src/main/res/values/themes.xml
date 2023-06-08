@@ -9,10 +9,15 @@
 
     <style name="RoundedSquareImageView">
         <item name="cornerSize">10%</item>
+
     </style>
 
     <style name="CircularCornerView">
         <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="DropDownInputBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="endIconTint">@color/black</item>
     </style>
 
 </resources>

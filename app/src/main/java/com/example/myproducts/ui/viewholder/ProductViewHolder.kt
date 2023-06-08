@@ -10,7 +10,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.myproducts.R
 import com.example.myproducts.databinding.ItemProductBinding
 import com.example.myproducts.utils.ViewListener.Companion.setOnSingleClickListener
-import com.example.runningtrackerapp.data.model.ProductItem
+import com.example.myproducts.data.model.ProductDetails
 
 class ProductViewHolder(itemView: View, onCardClick: (Int) -> Unit) :
     RecyclerView.ViewHolder(itemView) {
@@ -28,7 +28,7 @@ class ProductViewHolder(itemView: View, onCardClick: (Int) -> Unit) :
     fun bind(
         holder: RecyclerView.ViewHolder,
         position: Int,
-        productItem: ProductItem
+        productItem: ProductDetails
     ) {
         binding.run {
             Glide.with(holder.itemView.context)

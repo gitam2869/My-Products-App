@@ -1,6 +1,23 @@
 <resources>
     <string name="app_name">My Products</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add">Add</string>
+    <string name="product_name">Product name *</string>
+    <string name="name">Name*</string>
+    <string name="type">Type*</string>
+    <string name="price">Price*</string>
+    <string name="tax">Tax*</string>
+    <string name="add_product_image_optional">Add product image (optional)</string>
+    <string name="no_product_found">No product found!!!</string>
+
+    <string-array name="product_types">
+        <item>T1</item>
+        <item>T2</item>
+        <item>T3</item>
+        <item>T4</item>
+        <item>T5</item>
+        <item>T6</item>
+        <item>T7</item>
+    </string-array>
+
 </resources>

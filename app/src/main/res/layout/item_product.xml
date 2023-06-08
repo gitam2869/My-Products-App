@@ -43,7 +43,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_small"
-            android:text="Category"
+            android:text="Type"
             android:textColor="@color/Text_60"
             android:textSize="@dimen/text_size_small"
             android:textStyle="bold"

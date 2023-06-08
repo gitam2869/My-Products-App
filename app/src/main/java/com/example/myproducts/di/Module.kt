@@ -3,6 +3,7 @@ package com.example.myproducts.di
 import com.example.myproducts.data.api.ApiServices
 import com.example.myproducts.data.repository.ProductRepository
 import com.example.myproducts.utils.Constants
+import com.example.myproducts.viewmodel.AddProductViewModel
 import com.example.myproducts.viewmodel.ProductListViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -47,4 +48,5 @@ val repositoryModule = module {
 
 val viewModelModule = module {
     single { ProductListViewModel(get()) }
+    single { AddProductViewModel(get()) }
 }

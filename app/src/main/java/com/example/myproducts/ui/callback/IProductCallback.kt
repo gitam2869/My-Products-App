@@ -1,7 +1,7 @@
 package com.example.myproducts.ui.callback
 
-import com.example.runningtrackerapp.data.model.ProductItem
+import com.example.myproducts.data.model.ProductDetails
 
 interface IProductCallback {
-    fun onClick(position: Int, productItem: ProductItem)
+    fun onClick(position: Int, productItem: ProductDetails)
 }

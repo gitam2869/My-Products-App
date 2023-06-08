@@ -16,4 +16,14 @@ object ViewExtension {
         visibility = View.GONE
     }
 
+
+    fun View.disable() {
+        isEnabled = false
+        alpha = 0.6f
+    }
+
+    fun View.enable() {
+        isEnabled = true
+        alpha = 1.0f
+    }
 }

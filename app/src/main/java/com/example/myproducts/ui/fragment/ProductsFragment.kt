@@ -6,17 +6,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myproducts.MainActivity
 import com.example.myproducts.R
 import com.example.myproducts.databinding.FragmentProductsBinding
 import com.example.myproducts.ui.adapter.ProductsAdapter
 import com.example.myproducts.ui.callback.IProductCallback
 import com.example.myproducts.utils.ApiResult
+import com.example.myproducts.utils.Navigation.safeNavigation
 import com.example.myproducts.utils.ViewExtension.gone
 import com.example.myproducts.utils.ViewExtension.visible
+import com.example.myproducts.utils.ViewListener.Companion.setOnSingleClickListener
 import com.example.myproducts.viewmodel.ProductListViewModel
-import com.example.runningtrackerapp.data.model.ProductItem
-import org.koin.android.ext.android.get
+import com.example.myproducts.data.model.ProductDetails
+import com.example.myproducts.data.model.Products
+import com.example.myproducts.utils.ViewExtension.disable
+import com.example.myproducts.utils.ViewExtension.enable
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -29,6 +38,7 @@ class ProductsFragment : Fragment() {
 
     private val productListViewModel: ProductListViewModel by viewModel()
     private lateinit var productsAdapter: ProductsAdapter
+    private var products: MutableList<ProductDetails> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,14 +52,26 @@ class ProductsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView()
-
         observeProductsChanges()
         getProducts()
+        callListeners()
+        searchViewSetup()
+    }
+
+    private fun callListeners() {
+        binding.run {
+            btnAdd.setOnSingleClickListener {
+                findNavController().safeNavigation(
+                    R.id.productsFragment,
+                    R.id.addProductFragment
+                )
+            }
+        }
     }
 
     private fun recyclerView() {
         productsAdapter = ProductsAdapter(object : IProductCallback {
-            override fun onClick(position: Int, productItem: ProductItem) {
+            override fun onClick(position: Int, productItem: ProductDetails) {
                 Log.d(TAG, "onClick: " + productItem)
             }
         })
@@ -64,7 +86,12 @@ class ProductsFragment : Fragment() {
         productListViewModel.response.observe(viewLifecycleOwner) {
             when (it) {
                 is ApiResult.Success -> {
-                    it.data?.let { it1 -> productsAdapter.submitList(it1) }
+                    it.data?.let { it1 ->
+                        productsAdapter.submitList(it1)
+                        products = it1
+                    }
+
+                    val res = it.data?.filter { it.product_name.contains("dg") }
                 }
 
                 is ApiResult.Error -> {
@@ -75,18 +102,62 @@ class ProductsFragment : Fragment() {
                     if (it.isLoading) {
                         hideErrorView()
                         showLoading()
-                    } else
+                        setStateOfSearchView(false)
+                    } else {
+                        setStateOfSearchView(true)
                         hideLoading()
-
+                    }
                 }
             }
         }
     }
 
-    private fun getProducts() {
-        productListViewModel.getProducts()
+    private fun searchViewSetup() {
+        binding.searchView.run {
+            clearFocus()
+            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return false
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    hideErrorView()
+
+                    if (newText != null) {
+                        if (newText.isEmpty())
+                            productsAdapter.submitList(products)
+                        else
+                            filterList(newText)
+                    }
+                    return true
+                }
+            })
+        }
     }
 
+    private fun getProducts() {
+        lifecycleScope.launch {
+            productListViewModel.getProducts()
+        }
+    }
+
+
+    private fun filterList(query: String) {
+        val filterList =
+            products.filter {
+                it.product_name.lowercase().contains(query)
+                        || it.product_type.lowercase().contains(query)
+            }
+
+        productsAdapter.submitList(filterList)
+
+        if (filterList.isEmpty())
+            showErrorView(requireContext().resources.getString(R.string.no_product_found))
+    }
+
+    private fun setStateOfSearchView(state: Boolean) {
+        if (state) binding.searchView.enable() else binding.searchView.disable()
+    }
 
     private fun showLoading() {
         binding.pbLoading.visible()

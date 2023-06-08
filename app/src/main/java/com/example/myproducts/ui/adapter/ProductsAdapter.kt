@@ -6,24 +6,24 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myproducts.ui.callback.IProductCallback
 import com.example.myproducts.ui.viewholder.ProductViewHolder
-import com.example.runningtrackerapp.data.model.ProductItem
+import com.example.myproducts.data.model.ProductDetails
 
 class ProductsAdapter(val iProductCallback: IProductCallback) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val TAG = "CashValueAdapter"
 
-    private val differCallback = object : DiffUtil.ItemCallback<ProductItem>() {
+    private val differCallback = object : DiffUtil.ItemCallback<ProductDetails>() {
         override fun areItemsTheSame(
-            oldItem: ProductItem,
-            newItem: ProductItem
+            oldItem: ProductDetails,
+            newItem: ProductDetails
         ): Boolean {
             return oldItem.product_name == newItem.product_name
         }
 
         override fun areContentsTheSame(
-            oldItem: ProductItem,
-            newItem: ProductItem
+            oldItem: ProductDetails,
+            newItem: ProductDetails
         ): Boolean {
             return oldItem === newItem
         }
@@ -59,7 +59,7 @@ class ProductsAdapter(val iProductCallback: IProductCallback) :
         return differ.currentList.size
     }
 
-    fun submitList(list: List<ProductItem>) {
+    fun submitList(list: List<ProductDetails>) {
         differ.submitList(list)
     }
 }
