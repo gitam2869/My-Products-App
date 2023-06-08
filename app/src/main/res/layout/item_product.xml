@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/spacing_small"
+    android:layout_marginHorizontal="@dimen/spacing_small"
+    app:cardBackgroundColor="@color/white"
+    android:id="@+id/cv_product"
+    app:cardCornerRadius="@dimen/product_card_corner_radius">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_small">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_product"
+            android:layout_width="@dimen/product_image_width"
+            android:layout_height="@dimen/product_image_height"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/RoundedSquareImageView" />
+
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:text="Product Name"
+            android:textColor="@color/Text_80"
+            android:textSize="@dimen/text_size_small"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_product"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:text="Category"
+            android:textColor="@color/Text_60"
+            android:textSize="@dimen/text_size_small"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_product"
+            app:layout_constraintTop_toBottomOf="@id/tv_name" />
+
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:text="Price"
+            android:textColor="@color/Text_60"
+            android:textSize="@dimen/text_size_small"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/iv_product"
+            app:layout_constraintTop_toBottomOf="@id/tv_type" />
+
+        <TextView
+            android:id="@+id/tv_tax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:text="Tax"
+            android:textColor="@color/Text_60"
+            android:textSize="@dimen/text_size_small"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/tv_price"
+            app:layout_constraintStart_toEndOf="@id/tv_price"
+            app:layout_constraintTop_toTopOf="@id/tv_price" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
