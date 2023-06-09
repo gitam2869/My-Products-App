@@ -1,14 +1,10 @@
-package com.example.myproducts
+package com.example.myproducts.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.myproducts.databinding.ActivityMainBinding
-import com.example.myproducts.utils.ApiResult
-import com.example.myproducts.viewmodel.ProductListViewModel
 import com.google.android.material.snackbar.Snackbar
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,6 +16,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }

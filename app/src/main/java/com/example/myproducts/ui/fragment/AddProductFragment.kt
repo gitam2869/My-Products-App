@@ -14,10 +14,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
-import com.example.myproducts.MainActivity
 import com.example.myproducts.R
 import com.example.myproducts.data.model.ProductItemBody
 import com.example.myproducts.databinding.FragmentAddProductBinding
+import com.example.myproducts.ui.activity.MainActivity
 import com.example.myproducts.utils.ApiResult
 import com.example.myproducts.utils.ViewExtension.disable
 import com.example.myproducts.utils.ViewExtension.enable
@@ -85,6 +85,10 @@ class AddProductFragment : Fragment() {
 
     private fun callListeners() {
         binding.run {
+            header.setNavigationOnClickListener {
+                navigateToPrevious()
+            }
+
             ivProduct.setOnSingleClickListener {
                 pickImage()
             }
@@ -108,7 +112,7 @@ class AddProductFragment : Fragment() {
             atType.setOnItemClickListener { adapterView, view, i, l ->
                 val types = requireContext().resources.getStringArray(R.array.product_types)
                 type = types[i]
-                Log.d(TAG, "callListeners: at "+type)
+                Log.d(TAG, "callListeners: at " + type)
                 checkButtonStatus()
             }
 
@@ -138,7 +142,7 @@ class AddProductFragment : Fragment() {
         }
     }
 
-    private fun selectProductTypeSetup(){
+    private fun selectProductTypeSetup() {
         val types = requireContext().resources.getStringArray(R.array.product_types)
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.item_type, types)
         binding.atType.setAdapter(arrayAdapter)
@@ -222,13 +226,13 @@ class AddProductFragment : Fragment() {
     private fun showAddedDialog(productName: String) {
         val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Added!")
-        builder.setMessage("Your product $productName, is successfully added!")
+        builder.setMessage("Your product $productName is successfully added!")
         builder.setCancelable(true)
 
         builder.setPositiveButton("OK",
             DialogInterface.OnClickListener { dialog: DialogInterface?, which: Int ->
                 navigateToPrevious()
-            } as DialogInterface.OnClickListener)
+            })
 
         builder.setOnCancelListener {
             navigateToPrevious()

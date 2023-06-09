@@ -1,28 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_product"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/spacing_small"
     android:layout_marginHorizontal="@dimen/spacing_small"
+    android:layout_marginBottom="@dimen/spacing_small"
     app:cardBackgroundColor="@color/white"
-    android:id="@+id/cv_product"
-    app:cardCornerRadius="@dimen/product_card_corner_radius">
+    app:cardCornerRadius="@dimen/product_card_corner_radius"
+    app:strokeColor="?attr/colorPrimary">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_small">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/iv_product"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_product_image"
             android:layout_width="@dimen/product_image_width"
             android:layout_height="@dimen/product_image_height"
-            android:src="@mipmap/ic_launcher"
+            android:elevation="0dp"
+            app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearance="@style/RoundedSquareImageView" />
+            app:strokeColor="@color/gray"
+            app:strokeWidth="1dp">
+
+            <ImageView
+                android:id="@+id/iv_product"
+                android:layout_width="@dimen/product_image_width"
+                android:layout_height="@dimen/product_image_height"
+                android:scaleType="fitXY"
+                android:src="@drawable/default_image" />
+
+
+        </com.google.android.material.card.MaterialCardView>
 
 
         <TextView
@@ -32,24 +45,13 @@
             android:layout_marginStart="@dimen/spacing_small"
             android:text="Product Name"
             android:textColor="@color/Text_80"
-            android:textSize="@dimen/text_size_small"
+            android:textSize="@dimen/text_size_headline"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/tv_price"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/iv_product"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_type"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_small"
-            android:text="Type"
-            android:textColor="@color/Text_60"
-            android:textSize="@dimen/text_size_small"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/iv_product"
-            app:layout_constraintTop_toBottomOf="@id/tv_name" />
+            app:layout_constraintStart_toEndOf="@id/cv_product_image"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread_inside" />
 
 
         <TextView
@@ -58,24 +60,36 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_small"
             android:text="Price"
-            android:textColor="@color/Text_60"
-            android:textSize="@dimen/text_size_small"
+            android:textColor="@color/Text_80"
+            android:textSize="@dimen/text_size_title"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/iv_product"
-            app:layout_constraintTop_toBottomOf="@id/tv_type" />
+            app:layout_constraintBottom_toTopOf="@id/tv_type"
+            app:layout_constraintStart_toEndOf="@id/cv_product_image"
+            app:layout_constraintTop_toBottomOf="@id/tv_name" />
 
         <TextView
             android:id="@+id/tv_tax"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_small"
+            android:layout_marginStart="@dimen/spacing_medium"
             android:text="Tax"
             android:textColor="@color/Text_60"
             android:textSize="@dimen/text_size_small"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/tv_price"
-            app:layout_constraintStart_toEndOf="@id/tv_price"
-            app:layout_constraintTop_toTopOf="@id/tv_price" />
+            app:layout_constraintStart_toEndOf="@id/tv_price" />
+
+        <TextView
+            android:id="@+id/tv_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:text="Type"
+            android:textColor="@color/Text_40"
+            android:textSize="@dimen/text_size_caption"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cv_product_image"
+            app:layout_constraintTop_toBottomOf="@id/tv_price" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
